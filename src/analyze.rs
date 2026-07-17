@@ -8,7 +8,7 @@ use std::fs;
 use std::path::{Component, Path, PathBuf};
 
 #[derive(Debug, thiserror::Error)]
-pub enum RosyError {
+pub enum rozyError {
     #[error("could not read {path}: {source}")]
     Read {
         path: PathBuf,
@@ -141,18 +141,18 @@ struct RawSymbol {
 pub fn analyze_file(
     path: impl AsRef<Path>,
     options: &AnalysisOptions,
-) -> Result<Analysis, RosyError> {
+) -> Result<Analysis, rozyError> {
     let path = path.as_ref();
-    let bytes = fs::read(path).map_err(|source| RosyError::Read {
+    let bytes = fs::read(path).map_err(|source| rozyError::Read {
         path: path.to_path_buf(),
         source,
     })?;
-    let file = object::File::parse(&*bytes).map_err(|source| RosyError::Parse {
+    let file = object::File::parse(&*bytes).map_err(|source| rozyError::Parse {
         path: path.to_path_buf(),
         source,
     })?;
     if file.format() != BinaryFormat::Elf {
-        return Err(RosyError::NotElf(path.to_path_buf()));
+        return Err(rozyError::NotElf(path.to_path_buf()));
     }
 
     let architecture = format!("{:?}", file.architecture());
@@ -537,10 +537,10 @@ mod tests {
     fn attributes_local_and_symbol_only_crates() {
         assert_eq!(
             infer_crate_name(
-                "rosy::main",
-                &["rosy".into(), "src".into(), "main.rs".into()]
+                "rozy::main",
+                &["rozy".into(), "src".into(), "main.rs".into()]
             ),
-            Some("rosy".into())
+            Some("rozy".into())
         );
         assert_eq!(
             infer_crate_name(

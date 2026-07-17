@@ -1,4 +1,4 @@
-use rosy::{analyze_file, write_html, AnalysisOptions, MemoryTotals, RosyError};
+use rozy::{analyze_file, write_html, AnalysisOptions, MemoryTotals, rozyError};
 use clap::Parser;
 use serde_json::Value;
 use std::env;
@@ -9,17 +9,17 @@ use std::process::{Command, ExitCode, Stdio};
 
 #[derive(Debug, Parser)]
 #[command(
-    name = "cargo rosy",
+    name = "cargo rozy",
     version,
     about = "Analyze an ELF and generate an interactive, self-contained size report",
-    after_help = "Examples:\n  cargo rosy firmware.elf --open\n  cargo rosy --release --bin firmware\n  cargo rosy --target thumbv7em-none-eabihf --release"
+    after_help = "Examples:\n  cargo rozy firmware.elf --open\n  cargo rozy --release --bin firmware\n  cargo rozy --target thumbv7em-none-eabihf --release"
 )]
 struct Cli {
-    /// Existing ELF file. If omitted, cargo-rosy builds the current package.
+    /// Existing ELF file. If omitted, cargo-rozy builds the current package.
     elf: Option<PathBuf>,
 
     /// Output HTML report.
-    #[arg(short, long, default_value = "rosy-report.html")]
+    #[arg(short, long, default_value = "rozy-report.html")]
     output: PathBuf,
 
     /// Also write the raw analysis as JSON.
@@ -99,7 +99,7 @@ fn main() -> ExitCode {
 
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     let mut args: Vec<OsString> = env::args_os().collect();
-    if args.get(1).is_some_and(|arg| arg == OsStr::new("rosy")) {
+    if args.get(1).is_some_and(|arg| arg == OsStr::new("rozy")) {
         args.remove(1);
     }
     let cli = Cli::parse_from(args);
@@ -117,7 +117,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     write_html(&cli.output, &analysis)?;
     if let Some(json) = &cli.json {
         let rendered = serde_json::to_string_pretty(&analysis)?;
-        fs::write(json, rendered).map_err(|source| RosyError::Write {
+        fs::write(json, rendered).map_err(|source| rozyError::Write {
             path: json.clone(),
             source,
         })?;

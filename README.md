@@ -1,8 +1,8 @@
-# Rosy
+# rozy
 
 > Vibe coded by GPT-5.6 Sol, with few wetware interventions. ;)
 
-`rosy` turns an ELF executable into an interactive, self-contained size
+`rozy` turns an ELF executable into an interactive, self-contained size
 report. It is a Rust re-imagining of [RIOT-OS/cosy](https://github.com/RIOT-OS/cosy),
 with direct ELF/DWARF parsing and first-class Cargo integration.
 
@@ -22,7 +22,7 @@ table, source/crate/section grouping, Text/Data/BSS filters, and JSON/CSV export
 ## Install
 
 ```sh
-cargo install rosy
+cargo install rozy
 ```
 
 ## Use
@@ -30,19 +30,19 @@ cargo install rosy
 Analyze an existing embedded ELF:
 
 ```sh
-cargo rosy path/to/firmware.elf --open
+cargo rozy path/to/firmware.elf --open
 ```
 
 Build and analyze the current Cargo binary:
 
 ```sh
-cargo rosy --release --bin firmware --open
+cargo rozy --release --bin firmware --open
 ```
 
 Cross-compile first, then analyze the executable reported by Cargo:
 
 ```sh
-cargo rosy --target thumbv7em-none-eabihf --release --bin firmware
+cargo rozy --target thumbv7em-none-eabihf --release --bin firmware
 ```
 
 Useful options:
@@ -62,7 +62,7 @@ the analyzer. The deployed/stripped image can remain unchanged.
 ## Library API
 
 ```rust,no_run
-use rosy::{analyze_file, write_html, AnalysisOptions};
+use rozy::{analyze_file, write_html, AnalysisOptions};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let analysis = analyze_file("firmware.elf", &AnalysisOptions::default())?;
@@ -87,7 +87,7 @@ and stripped/zero-sized symbols that cannot be safely inferred.
 ## Relationship to RIOT-OS/cosy
 
 The original cosy requires an ELF plus linker map, combines `nm` source lines
-with map-file symbol sizes, then serves a D3 sunburst. `rosy` preserves
+with map-file symbol sizes, then serves a D3 sunburst. `rozy` preserves
 the useful Text/Data/BSS and hierarchical exploration model while using an
 independent Rust implementation and a dependency-free report frontend.
 

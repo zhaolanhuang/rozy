@@ -1,21 +1,21 @@
 [package]
-name = "rosy"
+name = "rozy"
 version = "0.1.0"
 edition = "2021"
 description = "Interactive ELF size visualization for embedded Rust applications"
 readme = "README.md"
-documentation = "https://docs.rs/rosy"
+documentation = "https://docs.rs/rozy"
 license = "MIT"
 keywords = ["elf", "embedded", "size", "visualization", "cargo-subcommand"]
 categories = ["command-line-utilities", "development-tools", "embedded"]
 include = ["src/**", "Cargo.toml", "README.md", "CHANGELOG.md", "LICENSE"]
 
 [lib]
-name = "rosy"
+name = "rozy"
 path = "src/lib.rs"
 
 [[bin]]
-name = "cargo-rosy"
+name = "cargo-rozy"
 path = "src/main.rs"
 
 [dependencies]

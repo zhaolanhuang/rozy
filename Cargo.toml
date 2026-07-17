@@ -1,0 +1,27 @@
+[package]
+name = "rosy"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+description = "Interactive ELF size visualization for embedded Rust applications"
+readme = "README.md"
+documentation = "https://docs.rs/rosy"
+keywords = ["elf", "embedded", "size", "visualization", "cargo-subcommand"]
+categories = ["command-line-utilities", "development-tools", "embedded"]
+include = ["src/**", "Cargo.toml", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[lib]
+name = "rosy"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cargo-rosy"
+path = "src/main.rs"
+
+[dependencies]
+addr2line = "0.27"
+clap = { version = "4.5", features = ["derive"] }
+object = "0.39"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"

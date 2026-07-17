@@ -4,11 +4,12 @@ version = "0.1.0"
 edition = "2021"
 description = "Interactive ELF size visualization for embedded Rust applications"
 readme = "README.md"
-documentation = "https://docs.rs/rozy"
 license = "MIT"
 keywords = ["elf", "embedded", "size", "visualization", "cargo-subcommand"]
 categories = ["command-line-utilities", "development-tools", "embedded"]
 include = ["src/**", "Cargo.toml", "README.md", "CHANGELOG.md", "LICENSE"]
+repository = "https://github.com/zhaolanhuang/rozy"
+authors = ["Zhaolan Huang <zhaolan94@gmail.com>"]
 
 [lib]
 name = "rozy"
